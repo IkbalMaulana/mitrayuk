@@ -1,0 +1,34 @@
+@import url("components/header.css");
+@import url("components/footer.css");
+@import url("components/positions.css");
+@import url("components/typography.css");
+@import url("components/forms.css");
+@import url("components/buttons.css");
+
+ul.numbered-list{
+	list-style-type: none;
+	font-size: 20px;
+	line-height: 26px;
+	padding-left: 0;
+	counter-reset: numList;
+}
+
+ul.numbered-list li {
+	position: relative;   
+	padding: 6px 0 0 40px;
+}
+
+ul.numbered-list li:before {
+	font-family: "roboto-bold";
+	counter-increment: numList;
+	content: counter(numList);	
+	height: 30px;
+	width: 30px;
+	border: 2px solid #00652B;
+	border-radius: 50%;
+	color: #00652B;
+	text-align: center;
+	position: absolute;      
+	left: 0;
+	top: 0;
+}

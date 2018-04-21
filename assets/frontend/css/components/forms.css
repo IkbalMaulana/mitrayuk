@@ -1,0 +1,4 @@
+.form-control.no-border,
+.form-control.no-border:focus {
+	border-color: transparent;
+}

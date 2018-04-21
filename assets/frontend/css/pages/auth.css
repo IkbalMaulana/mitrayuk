@@ -1,0 +1,33 @@
+.bg-login,
+.bg-register{
+	height: 100vh;
+	padding-top: 60vh;
+}
+
+.bg-login{
+	background: url(../../img/bg/03.jpg) center  no-repeat;
+	background-size: cover;	
+}
+
+.bg-register{
+	background: url(../../img/bg/02.jpg) center  no-repeat;
+	background-size: cover;	
+}
+
+.bg-login .caption,
+.bg-register .caption{
+	background: #FFF;
+	opacity: 0.8;
+	padding: 20px 30px;
+	margin: -0vh auto;
+	width: 60%;
+}
+
+.content{
+	width: 50%;
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 10vh;
+}
+
+.top-20{margin-top: 20px}

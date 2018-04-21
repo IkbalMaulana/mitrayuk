@@ -1,0 +1,28 @@
+.text-white{
+	color: #FFF;
+}
+
+.text-base{
+	color: #7C4DFF;
+}
+
+.text-upper{
+	text-transform: uppercase;
+}
+
+.text-bold{
+	font-family: "roboto-bold";
+}
+
+.text-green{
+	color: #00652B;
+}
+
+a{
+	color: #7C4DFF;
+}
+
+a:hover{
+	color: #6a3093;
+	text-decoration: none;
+}

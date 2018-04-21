@@ -1,0 +1,59 @@
+@import url('components/positions.css');
+
+body{
+	font-family: "roboto-regular";	
+}
+
+p{
+	font-size: 0.9rem;
+}
+
+i.material-icons{
+	vertical-align: middle;
+}
+
+button{
+	cursor: pointer;
+}
+
+section{
+	padding-top: 50px;
+	padding-bottom: 50px;
+	min-height: 200px;	
+}
+
+.text-green{
+	color: #16814B
+}
+
+.border-top-grey{
+	border-top: 1px solid #E7E7E7;
+}
+
+.border-bottom-grey{
+	border-bottom: 1px solid #E7E7E7;
+}
+
+.border-top-bottom-grey{
+	border-top: 1px solid #E7E7E7;
+	border-bottom: 1px solid #E7E7E7;	
+}
+
+.bg-gradient-green{
+	background: #31a36a;
+	background: -webkit-linear-gradient(to left, #2b5a53, #31a36a);
+	background: linear-gradient(to left, #2b5a53, #31a36a);
+}
+
+img.gray-to-color {
+	-webkit-filter: grayscale(100%);
+	-moz-filter: grayscale(100%);
+	filter: grayscale(100%);
+	transition: all 0.5s ease;
+}
+
+img.gray-to-color:hover {
+	-webkit-filter: grayscale(0%);
+	-moz-filter: grayscale(0%);
+	filter: grayscale(0%);
+}

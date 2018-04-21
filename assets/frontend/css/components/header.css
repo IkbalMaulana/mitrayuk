@@ -1,0 +1,16 @@
+.navbar-custom{
+	min-height: 80px;
+	border-bottom: 1px solid #E7E7E7;
+}
+
+.navbar-custom ul.navbar-nav li a{
+	/*text-transform: uppercase;*/
+}
+
+.navbar-custom ul.navbar-nav li{
+	padding-left: 10px;
+}
+
+.navbar-custom ul.navbar-nav li:hover{
+	color: #5CB85C;
+}

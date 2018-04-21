@@ -1,0 +1,38 @@
+.btn-transparent-white{
+	background: transparent;
+	border: 1px solid #FFF;	
+	color: #FFF;
+}
+
+.btn-transparent-white:hover,
+.btn-transparent-white:focus{
+	background: #FFF;
+	color: #000;
+}
+
+.btn-outline-base{
+	background: transparent;
+	border: 1px solid #31A36A;	
+	color: rgba(0,0,0,.5);
+}
+
+.btn-outline-base:hover,
+.btn-outline-base:focus{
+	background: #31A36A;
+	color: #FFF;
+}
+
+.btn-base{
+	background: #31A36A;
+	color: #FFF;
+}
+
+.btn-base:hover,
+.btn-base:focus{
+	background: #16814B;
+	color: #FFF;
+}
+
+.btn-length{
+	padding: .5rem 2rem;
+}
