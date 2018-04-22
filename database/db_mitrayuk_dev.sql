@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 21, 2018 at 05:35 AM
+-- Generation Time: Apr 22, 2018 at 04:13 PM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -17,8 +17,222 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `db_mitrakuy_dev`
+-- Database: `db_mitrayuk_dev`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `brand`
+--
+
+CREATE TABLE IF NOT EXISTS `brand` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `slogan` varchar(255) NOT NULL,
+  `since` varchar(255) NOT NULL,
+  `siup` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `owner` varchar(255) NOT NULL,
+  `logo` text NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_date` timestamp NULL DEFAULT NULL,
+  `created_by` varchar(255) NOT NULL,
+  `updated_by` varchar(255) NOT NULL,
+  `deleted_by` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `brand_category`
+--
+
+CREATE TABLE IF NOT EXISTS `brand_category` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_date` timestamp NULL DEFAULT NULL,
+  `created_by` varchar(255) NOT NULL,
+  `updated_by` varchar(255) NOT NULL,
+  `deleted_by` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `brand_item`
+--
+
+CREATE TABLE IF NOT EXISTS `brand_item` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `id_brand` int(11) NOT NULL,
+  `id_category` int(11) NOT NULL,
+  `description` text NOT NULL,
+  `main_photo` text NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `priority` varchar(255) NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_date` timestamp NULL DEFAULT NULL,
+  `created_by` varchar(255) NOT NULL,
+  `updated_by` varchar(255) NOT NULL,
+  `deleted_by` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `brand_item_contact`
+--
+
+CREATE TABLE IF NOT EXISTS `brand_item_contact` (
+  `id` int(11) NOT NULL,
+  `id_brand_item` int(11) NOT NULL,
+  `sms` varchar(255) DEFAULT NULL,
+  `phone_call` varchar(255) DEFAULT NULL,
+  `wa` varchar(255) DEFAULT NULL,
+  `line` varchar(255) DEFAULT NULL,
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_date` timestamp NULL DEFAULT NULL,
+  `created_by` varchar(255) NOT NULL,
+  `updated_by` varchar(255) NOT NULL,
+  `deleted_by` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `brand_item_discuss`
+--
+
+CREATE TABLE IF NOT EXISTS `brand_item_discuss` (
+  `id` int(11) NOT NULL,
+  `id_brand_item` int(11) NOT NULL,
+  `id_user_provider` int(11) NOT NULL,
+  `id_user_candidate` int(11) NOT NULL,
+  `code` int(11) NOT NULL,
+  `text` text NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_date` timestamp NULL DEFAULT NULL,
+  `created_by` varchar(255) NOT NULL,
+  `updated_by` varchar(255) NOT NULL,
+  `deleted_by` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `brand_item_packet`
+--
+
+CREATE TABLE IF NOT EXISTS `brand_item_packet` (
+  `id` int(11) NOT NULL,
+  `id_brand_item` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `price` double NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_date` timestamp NULL DEFAULT NULL,
+  `created_by` varchar(255) NOT NULL,
+  `updated_by` varchar(255) NOT NULL,
+  `deleted_by` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `brand_item_photo`
+--
+
+CREATE TABLE IF NOT EXISTS `brand_item_photo` (
+  `id` int(11) NOT NULL,
+  `id_brand_item` int(11) NOT NULL,
+  `photo_name` text NOT NULL,
+  `photo_src` text NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_date` timestamp NULL DEFAULT NULL,
+  `created_by` varchar(255) NOT NULL,
+  `updated_by` varchar(255) NOT NULL,
+  `deleted_by` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer`
+--
+
+CREATE TABLE IF NOT EXISTS `customer` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `gender` enum('Laki-laki','Perempuan') NOT NULL,
+  `dob` date NOT NULL,
+  `photo` text NOT NULL,
+  `address` text NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone_number` varchar(255) NOT NULL,
+  `type` enum('customer','mitra') NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_date` timestamp NULL DEFAULT NULL,
+  `created_by` varchar(255) NOT NULL,
+  `updated_by` varchar(255) NOT NULL,
+  `deleted_by` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`id`, `name`, `password`, `gender`, `dob`, `photo`, `address`, `email`, `phone_number`, `type`, `created_date`, `updated_date`, `deleted_date`, `created_by`, `updated_by`, `deleted_by`) VALUES
+(1, 'ikbal maulana', 'c60f656860b775606880575bea0cd8a4', '', '0000-00-00', '', '', 'ikbal', '085894525693', 'customer', '2018-04-22 04:55:15', '2018-04-22 04:55:15', NULL, '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer_brand_item_favorite`
+--
+
+CREATE TABLE IF NOT EXISTS `customer_brand_item_favorite` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_brand_item` int(11) NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_date` timestamp NULL DEFAULT NULL,
+  `created_by` varchar(255) NOT NULL,
+  `updated_by` varchar(255) NOT NULL,
+  `deleted_by` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer_brand_item_last_seen`
+--
+
+CREATE TABLE IF NOT EXISTS `customer_brand_item_last_seen` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_brand_item` int(11) NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_date` timestamp NULL DEFAULT NULL,
+  `created_by` varchar(255) NOT NULL,
+  `updated_by` varchar(255) NOT NULL,
+  `deleted_by` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -632,7 +846,7 @@ CREATE TABLE IF NOT EXISTS `master_menu` (
   `createDate` datetime NOT NULL,
   `updateBy` varchar(30) NOT NULL,
   `updateDate` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `master_menu`
@@ -662,7 +876,7 @@ CREATE TABLE IF NOT EXISTS `master_menu_privilege` (
   `createDate` datetime NOT NULL,
   `updateBy` varchar(30) NOT NULL,
   `updateDate` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `master_menu_privilege`
@@ -719,7 +933,7 @@ CREATE TABLE IF NOT EXISTS `master_module` (
   `createDate` datetime NOT NULL,
   `updateBy` varchar(30) NOT NULL,
   `updateDate` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `master_module`
@@ -7883,7 +8097,7 @@ CREATE TABLE IF NOT EXISTS `privilege_user` (
   `createDate` datetime NOT NULL,
   `updateBy` varchar(30) NOT NULL,
   `updateDate` datetime NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `privilege_user`
@@ -7925,6 +8139,48 @@ INSERT INTO `privilege_user` (`idPrivilege`, `idRole`, `menuPrivilege`, `actionP
 (86, 3, 8, 2, '', '2017-12-30 14:16:33', '', '0000-00-00 00:00:00'),
 (87, 3, 8, 3, '', '2017-12-30 14:16:33', '', '0000-00-00 00:00:00'),
 (88, 3, 8, 4, '', '2017-12-30 14:16:33', '', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `request`
+--
+
+CREATE TABLE IF NOT EXISTS `request` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_brand_item` int(11) NOT NULL,
+  `place_length` int(11) NOT NULL,
+  `place_width` int(11) NOT NULL,
+  `location_address` text NOT NULL,
+  `location_type` double NOT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_date` timestamp NULL DEFAULT NULL,
+  `created_by` varchar(255) NOT NULL,
+  `updated_by` varchar(255) NOT NULL,
+  `deleted_by` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `request_photo`
+--
+
+CREATE TABLE IF NOT EXISTS `request_photo` (
+  `id` int(11) NOT NULL,
+  `id_request` int(11) NOT NULL,
+  `photo_name` text NOT NULL,
+  `photo_src` text NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_date` timestamp NULL DEFAULT NULL,
+  `created_by` varchar(255) NOT NULL,
+  `updated_by` varchar(255) NOT NULL,
+  `deleted_by` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -7975,255 +8231,6 @@ CREATE TABLE IF NOT EXISTS `slider` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_brand`
---
-
-CREATE TABLE IF NOT EXISTS `tbl_brand` (
-  `id` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `slogan` varchar(255) NOT NULL,
-  `since` varchar(255) NOT NULL,
-  `siup` varchar(255) NOT NULL,
-  `description` text NOT NULL,
-  `owner` varchar(255) NOT NULL,
-  `logo` text NOT NULL,
-  `status` varchar(255) NOT NULL,
-  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `deleted_date` timestamp NULL DEFAULT NULL,
-  `created_by` varchar(255) NOT NULL,
-  `updated_by` varchar(255) NOT NULL,
-  `deleted_by` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_brand_item`
---
-
-CREATE TABLE IF NOT EXISTS `tbl_brand_item` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `id_brand` int(11) NOT NULL,
-  `id_category` int(11) NOT NULL,
-  `description` text NOT NULL,
-  `main_photo` text NOT NULL,
-  `status` varchar(255) NOT NULL,
-  `priority` varchar(255) NOT NULL,
-  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `deleted_date` timestamp NULL DEFAULT NULL,
-  `created_by` varchar(255) NOT NULL,
-  `updated_by` varchar(255) NOT NULL,
-  `deleted_by` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_brand_item_contact`
---
-
-CREATE TABLE IF NOT EXISTS `tbl_brand_item_contact` (
-  `id` int(11) NOT NULL,
-  `id_brand_item` int(11) NOT NULL,
-  `sms` varchar(255) DEFAULT NULL,
-  `phone_call` varchar(255) DEFAULT NULL,
-  `wa` varchar(255) DEFAULT NULL,
-  `line` varchar(255) DEFAULT NULL,
-  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `deleted_date` timestamp NULL DEFAULT NULL,
-  `created_by` varchar(255) NOT NULL,
-  `updated_by` varchar(255) NOT NULL,
-  `deleted_by` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_brand_item_discuss`
---
-
-CREATE TABLE IF NOT EXISTS `tbl_brand_item_discuss` (
-  `id` int(11) NOT NULL,
-  `id_brand_item` int(11) NOT NULL,
-  `id_user_provider` int(11) NOT NULL,
-  `id_user_candidate` int(11) NOT NULL,
-  `code` int(11) NOT NULL,
-  `text` text NOT NULL,
-  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `deleted_date` timestamp NULL DEFAULT NULL,
-  `created_by` varchar(255) NOT NULL,
-  `updated_by` varchar(255) NOT NULL,
-  `deleted_by` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_brand_item_packet`
---
-
-CREATE TABLE IF NOT EXISTS `tbl_brand_item_packet` (
-  `id` int(11) NOT NULL,
-  `id_brand_item` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `description` text NOT NULL,
-  `price` double NOT NULL,
-  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `deleted_date` timestamp NULL DEFAULT NULL,
-  `created_by` varchar(255) NOT NULL,
-  `updated_by` varchar(255) NOT NULL,
-  `deleted_by` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_brand_item_photo`
---
-
-CREATE TABLE IF NOT EXISTS `tbl_brand_item_photo` (
-  `id` int(11) NOT NULL,
-  `id_brand_item` int(11) NOT NULL,
-  `photo_name` text NOT NULL,
-  `photo_src` text NOT NULL,
-  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `deleted_date` timestamp NULL DEFAULT NULL,
-  `created_by` varchar(255) NOT NULL,
-  `updated_by` varchar(255) NOT NULL,
-  `deleted_by` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_category`
---
-
-CREATE TABLE IF NOT EXISTS `tbl_category` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `deleted_date` timestamp NULL DEFAULT NULL,
-  `created_by` varchar(255) NOT NULL,
-  `updated_by` varchar(255) NOT NULL,
-  `deleted_by` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_request`
---
-
-CREATE TABLE IF NOT EXISTS `tbl_request` (
-  `id` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `id_brand_item` int(11) NOT NULL,
-  `place_length` int(11) NOT NULL,
-  `place_width` int(11) NOT NULL,
-  `location_address` text NOT NULL,
-  `location_type` double NOT NULL,
-  `status` varchar(255) DEFAULT NULL,
-  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `deleted_date` timestamp NULL DEFAULT NULL,
-  `created_by` varchar(255) NOT NULL,
-  `updated_by` varchar(255) NOT NULL,
-  `deleted_by` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_request_photo`
---
-
-CREATE TABLE IF NOT EXISTS `tbl_request_photo` (
-  `id` int(11) NOT NULL,
-  `id_request` int(11) NOT NULL,
-  `photo_name` text NOT NULL,
-  `photo_src` text NOT NULL,
-  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `deleted_date` timestamp NULL DEFAULT NULL,
-  `created_by` varchar(255) NOT NULL,
-  `updated_by` varchar(255) NOT NULL,
-  `deleted_by` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_user`
---
-
-CREATE TABLE IF NOT EXISTS `tbl_user` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `gender` varchar(255) NOT NULL,
-  `photo` text NOT NULL,
-  `address` text NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `phone_number` varchar(255) NOT NULL,
-  `type` varchar(255) NOT NULL,
-  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `deleted_date` timestamp NULL DEFAULT NULL,
-  `created_by` varchar(255) NOT NULL,
-  `updated_by` varchar(255) NOT NULL,
-  `deleted_by` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_user_brand_item_favorite`
---
-
-CREATE TABLE IF NOT EXISTS `tbl_user_brand_item_favorite` (
-  `id` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `id_brand_item` int(11) NOT NULL,
-  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `deleted_date` timestamp NULL DEFAULT NULL,
-  `created_by` varchar(255) NOT NULL,
-  `updated_by` varchar(255) NOT NULL,
-  `deleted_by` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_user_brand_item_last_seen`
---
-
-CREATE TABLE IF NOT EXISTS `tbl_user_brand_item_last_seen` (
-  `id` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `id_brand_item` int(11) NOT NULL,
-  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `deleted_date` timestamp NULL DEFAULT NULL,
-  `created_by` varchar(255) NOT NULL,
-  `updated_by` varchar(255) NOT NULL,
-  `deleted_by` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `user`
 --
 
@@ -8249,7 +8256,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`idUser`, `usernameUser`, `nameUser`, `emailUser`, `phone`, `fotoUser`, `passwordUser`, `roleUser`, `statusUser`, `lastLogin`, `createBy`, `createDate`, `updateBy`, `updateDate`) VALUES
-(1, 'superadmin', 'KOMIT', 'superadmin@admin.com', '', '', '4c34fb13be991a73d5bf0abc44bdcfda', 1, 'y', '2018-02-17 21:03:52', '', '0000-00-00 00:00:00', '1', '2017-09-12 14:50:09'),
+(1, 'superadmin', 'KOMIT', 'superadmin@admin.com', '', '', '4c34fb13be991a73d5bf0abc44bdcfda', 1, 'y', '2018-04-22 21:12:32', '', '0000-00-00 00:00:00', '1', '2017-09-12 14:50:09'),
 (2, 'admin', 'Admin', 'admin@xpert.id', '', '', 'e0702c0d904fcd2820d45f7db1e9cba6', 3, 'y', '2017-12-30 14:14:55', '1', '2017-12-30 14:11:56', '', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
@@ -8279,6 +8286,66 @@ CREATE TABLE IF NOT EXISTS `user_info` (
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `brand`
+--
+ALTER TABLE `brand`
+  ADD PRIMARY KEY (`id`), ADD KEY `id_user` (`id_user`);
+
+--
+-- Indexes for table `brand_category`
+--
+ALTER TABLE `brand_category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `brand_item`
+--
+ALTER TABLE `brand_item`
+  ADD PRIMARY KEY (`id`), ADD KEY `id_brand` (`id_brand`,`id_category`), ADD KEY `id_category` (`id_category`);
+
+--
+-- Indexes for table `brand_item_contact`
+--
+ALTER TABLE `brand_item_contact`
+  ADD PRIMARY KEY (`id`), ADD KEY `id_brand_item` (`id_brand_item`);
+
+--
+-- Indexes for table `brand_item_discuss`
+--
+ALTER TABLE `brand_item_discuss`
+  ADD PRIMARY KEY (`id`), ADD KEY `id_user_provider` (`id_user_provider`), ADD KEY `id_user_candidate` (`id_user_candidate`), ADD KEY `id_brand_item` (`id_brand_item`);
+
+--
+-- Indexes for table `brand_item_packet`
+--
+ALTER TABLE `brand_item_packet`
+  ADD PRIMARY KEY (`id`), ADD KEY `id_brand_item` (`id_brand_item`);
+
+--
+-- Indexes for table `brand_item_photo`
+--
+ALTER TABLE `brand_item_photo`
+  ADD PRIMARY KEY (`id`), ADD KEY `id_brand_item` (`id_brand_item`);
+
+--
+-- Indexes for table `customer`
+--
+ALTER TABLE `customer`
+  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `name` (`name`);
+
+--
+-- Indexes for table `customer_brand_item_favorite`
+--
+ALTER TABLE `customer_brand_item_favorite`
+  ADD PRIMARY KEY (`id`), ADD KEY `id_user` (`id_user`), ADD KEY `id_brand_item` (`id_brand_item`);
+
+--
+-- Indexes for table `customer_brand_item_last_seen`
+--
+ALTER TABLE `customer_brand_item_last_seen`
+  ADD PRIMARY KEY (`id`), ADD KEY `id_user` (`id_user`), ADD KEY `id_brand_item` (`id_brand_item`);
 
 --
 -- Indexes for table `master_category`
@@ -8353,6 +8420,18 @@ ALTER TABLE `privilege_user`
   ADD PRIMARY KEY (`idPrivilege`);
 
 --
+-- Indexes for table `request`
+--
+ALTER TABLE `request`
+  ADD PRIMARY KEY (`id`), ADD KEY `id_user` (`id_user`), ADD KEY `id_brand_item` (`id_brand_item`);
+
+--
+-- Indexes for table `request_photo`
+--
+ALTER TABLE `request_photo`
+  ADD PRIMARY KEY (`id`), ADD KEY `id_request` (`id_request`);
+
+--
 -- Indexes for table `role_module`
 --
 ALTER TABLE `role_module`
@@ -8363,78 +8442,6 @@ ALTER TABLE `role_module`
 --
 ALTER TABLE `slider`
   ADD PRIMARY KEY (`sliderId`);
-
---
--- Indexes for table `tbl_brand`
---
-ALTER TABLE `tbl_brand`
-  ADD PRIMARY KEY (`id`), ADD KEY `id_user` (`id_user`);
-
---
--- Indexes for table `tbl_brand_item`
---
-ALTER TABLE `tbl_brand_item`
-  ADD PRIMARY KEY (`id`), ADD KEY `id_brand` (`id_brand`,`id_category`), ADD KEY `id_category` (`id_category`);
-
---
--- Indexes for table `tbl_brand_item_contact`
---
-ALTER TABLE `tbl_brand_item_contact`
-  ADD PRIMARY KEY (`id`), ADD KEY `id_brand_item` (`id_brand_item`);
-
---
--- Indexes for table `tbl_brand_item_discuss`
---
-ALTER TABLE `tbl_brand_item_discuss`
-  ADD PRIMARY KEY (`id`), ADD KEY `id_user_provider` (`id_user_provider`), ADD KEY `id_user_candidate` (`id_user_candidate`), ADD KEY `id_brand_item` (`id_brand_item`);
-
---
--- Indexes for table `tbl_brand_item_packet`
---
-ALTER TABLE `tbl_brand_item_packet`
-  ADD PRIMARY KEY (`id`), ADD KEY `id_brand_item` (`id_brand_item`);
-
---
--- Indexes for table `tbl_brand_item_photo`
---
-ALTER TABLE `tbl_brand_item_photo`
-  ADD PRIMARY KEY (`id`), ADD KEY `id_brand_item` (`id_brand_item`);
-
---
--- Indexes for table `tbl_category`
---
-ALTER TABLE `tbl_category`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tbl_request`
---
-ALTER TABLE `tbl_request`
-  ADD PRIMARY KEY (`id`), ADD KEY `id_user` (`id_user`), ADD KEY `id_brand_item` (`id_brand_item`);
-
---
--- Indexes for table `tbl_request_photo`
---
-ALTER TABLE `tbl_request_photo`
-  ADD PRIMARY KEY (`id`), ADD KEY `id_request` (`id_request`);
-
---
--- Indexes for table `tbl_user`
---
-ALTER TABLE `tbl_user`
-  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `name` (`name`);
-
---
--- Indexes for table `tbl_user_brand_item_favorite`
---
-ALTER TABLE `tbl_user_brand_item_favorite`
-  ADD PRIMARY KEY (`id`), ADD KEY `id_user` (`id_user`), ADD KEY `id_brand_item` (`id_brand_item`);
-
---
--- Indexes for table `tbl_user_brand_item_last_seen`
---
-ALTER TABLE `tbl_user_brand_item_last_seen`
-  ADD PRIMARY KEY (`id`), ADD KEY `id_user` (`id_user`), ADD KEY `id_brand_item` (`id_brand_item`);
 
 --
 -- Indexes for table `user`
@@ -8453,6 +8460,56 @@ ALTER TABLE `user_info`
 --
 
 --
+-- AUTO_INCREMENT for table `brand`
+--
+ALTER TABLE `brand`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `brand_category`
+--
+ALTER TABLE `brand_category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `brand_item`
+--
+ALTER TABLE `brand_item`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `brand_item_contact`
+--
+ALTER TABLE `brand_item_contact`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `brand_item_discuss`
+--
+ALTER TABLE `brand_item_discuss`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `brand_item_packet`
+--
+ALTER TABLE `brand_item_packet`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `brand_item_photo`
+--
+ALTER TABLE `brand_item_photo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `customer`
+--
+ALTER TABLE `customer`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `customer_brand_item_favorite`
+--
+ALTER TABLE `customer_brand_item_favorite`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `customer_brand_item_last_seen`
+--
+ALTER TABLE `customer_brand_item_last_seen`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `master_category`
 --
 ALTER TABLE `master_category`
@@ -8466,17 +8523,17 @@ ALTER TABLE `master_data`
 -- AUTO_INCREMENT for table `master_menu`
 --
 ALTER TABLE `master_menu`
-  MODIFY `idMenu` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24;
+  MODIFY `idMenu` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `master_menu_privilege`
 --
 ALTER TABLE `master_menu_privilege`
-  MODIFY `idMenuPrivilege` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=87;
+  MODIFY `idMenuPrivilege` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=32;
 --
 -- AUTO_INCREMENT for table `master_module`
 --
 ALTER TABLE `master_module`
-  MODIFY `idModule` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `idModule` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `master_subdistrict`
 --
@@ -8501,72 +8558,22 @@ ALTER TABLE `pengaturan_attribute_detail`
 -- AUTO_INCREMENT for table `privilege_user`
 --
 ALTER TABLE `privilege_user`
-  MODIFY `idPrivilege` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=111;
+  MODIFY `idPrivilege` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=89;
+--
+-- AUTO_INCREMENT for table `request`
+--
+ALTER TABLE `request`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `request_photo`
+--
+ALTER TABLE `request_photo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `slider`
 --
 ALTER TABLE `slider`
   MODIFY `sliderId` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `tbl_brand`
---
-ALTER TABLE `tbl_brand`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `tbl_brand_item`
---
-ALTER TABLE `tbl_brand_item`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `tbl_brand_item_contact`
---
-ALTER TABLE `tbl_brand_item_contact`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `tbl_brand_item_discuss`
---
-ALTER TABLE `tbl_brand_item_discuss`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `tbl_brand_item_packet`
---
-ALTER TABLE `tbl_brand_item_packet`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `tbl_brand_item_photo`
---
-ALTER TABLE `tbl_brand_item_photo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `tbl_category`
---
-ALTER TABLE `tbl_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `tbl_request`
---
-ALTER TABLE `tbl_request`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `tbl_request_photo`
---
-ALTER TABLE `tbl_request_photo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `tbl_user`
---
-ALTER TABLE `tbl_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `tbl_user_brand_item_favorite`
---
-ALTER TABLE `tbl_user_brand_item_favorite`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `tbl_user_brand_item_last_seen`
---
-ALTER TABLE `tbl_user_brand_item_last_seen`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `user`
 --
@@ -8582,56 +8589,56 @@ ALTER TABLE `user_info`
 --
 
 --
--- Constraints for table `tbl_brand`
+-- Constraints for table `brand`
 --
-ALTER TABLE `tbl_brand`
-ADD CONSTRAINT `tbl_brand_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `tbl_user` (`id`);
+ALTER TABLE `brand`
+ADD CONSTRAINT `brand_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `customer` (`id`);
 
 --
--- Constraints for table `tbl_brand_item`
+-- Constraints for table `brand_item`
 --
-ALTER TABLE `tbl_brand_item`
-ADD CONSTRAINT `tbl_brand_item_ibfk_1` FOREIGN KEY (`id_brand`) REFERENCES `tbl_brand` (`id`),
-ADD CONSTRAINT `tbl_brand_item_ibfk_2` FOREIGN KEY (`id_category`) REFERENCES `tbl_category` (`id`);
+ALTER TABLE `brand_item`
+ADD CONSTRAINT `brand_item_ibfk_1` FOREIGN KEY (`id_brand`) REFERENCES `brand` (`id`),
+ADD CONSTRAINT `brand_item_ibfk_2` FOREIGN KEY (`id_category`) REFERENCES `brand_category` (`id`);
 
 --
--- Constraints for table `tbl_brand_item_contact`
+-- Constraints for table `brand_item_contact`
 --
-ALTER TABLE `tbl_brand_item_contact`
-ADD CONSTRAINT `tbl_brand_item_contact_ibfk_1` FOREIGN KEY (`id_brand_item`) REFERENCES `tbl_brand_item` (`id`);
+ALTER TABLE `brand_item_contact`
+ADD CONSTRAINT `brand_item_contact_ibfk_1` FOREIGN KEY (`id_brand_item`) REFERENCES `brand_item` (`id`);
 
 --
--- Constraints for table `tbl_brand_item_discuss`
+-- Constraints for table `brand_item_discuss`
 --
-ALTER TABLE `tbl_brand_item_discuss`
-ADD CONSTRAINT `tbl_brand_item_discuss_ibfk_1` FOREIGN KEY (`id_brand_item`) REFERENCES `tbl_brand_item` (`id`),
-ADD CONSTRAINT `tbl_brand_item_discuss_ibfk_2` FOREIGN KEY (`id_user_provider`) REFERENCES `tbl_user` (`id`),
-ADD CONSTRAINT `tbl_brand_item_discuss_ibfk_3` FOREIGN KEY (`id_user_candidate`) REFERENCES `tbl_user` (`id`);
+ALTER TABLE `brand_item_discuss`
+ADD CONSTRAINT `brand_item_discuss_ibfk_1` FOREIGN KEY (`id_brand_item`) REFERENCES `brand_item` (`id`),
+ADD CONSTRAINT `brand_item_discuss_ibfk_2` FOREIGN KEY (`id_user_provider`) REFERENCES `customer` (`id`),
+ADD CONSTRAINT `brand_item_discuss_ibfk_3` FOREIGN KEY (`id_user_candidate`) REFERENCES `customer` (`id`);
 
 --
--- Constraints for table `tbl_brand_item_packet`
+-- Constraints for table `brand_item_packet`
 --
-ALTER TABLE `tbl_brand_item_packet`
-ADD CONSTRAINT `tbl_brand_item_packet_ibfk_1` FOREIGN KEY (`id_brand_item`) REFERENCES `tbl_brand_item` (`id`);
+ALTER TABLE `brand_item_packet`
+ADD CONSTRAINT `brand_item_packet_ibfk_1` FOREIGN KEY (`id_brand_item`) REFERENCES `brand_item` (`id`);
 
 --
--- Constraints for table `tbl_brand_item_photo`
+-- Constraints for table `brand_item_photo`
 --
-ALTER TABLE `tbl_brand_item_photo`
-ADD CONSTRAINT `tbl_brand_item_photo_ibfk_1` FOREIGN KEY (`id_brand_item`) REFERENCES `tbl_brand_item` (`id`);
+ALTER TABLE `brand_item_photo`
+ADD CONSTRAINT `brand_item_photo_ibfk_1` FOREIGN KEY (`id_brand_item`) REFERENCES `brand_item` (`id`);
 
 --
--- Constraints for table `tbl_request`
+-- Constraints for table `request`
 --
-ALTER TABLE `tbl_request`
-ADD CONSTRAINT `tbl_request_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `tbl_user` (`id`),
-ADD CONSTRAINT `tbl_request_ibfk_2` FOREIGN KEY (`id_brand_item`) REFERENCES `tbl_brand_item` (`id`);
+ALTER TABLE `request`
+ADD CONSTRAINT `request_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `customer` (`id`),
+ADD CONSTRAINT `request_ibfk_2` FOREIGN KEY (`id_brand_item`) REFERENCES `brand_item` (`id`);
 
 --
--- Constraints for table `tbl_request_photo`
+-- Constraints for table `request_photo`
 --
-ALTER TABLE `tbl_request_photo`
-ADD CONSTRAINT `tbl_request_photo_ibfk_1` FOREIGN KEY (`id_request`) REFERENCES `tbl_request` (`id`);
+ALTER TABLE `request_photo`
+ADD CONSTRAINT `request_photo_ibfk_1` FOREIGN KEY (`id_request`) REFERENCES `request` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
