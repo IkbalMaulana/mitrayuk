@@ -32,15 +32,22 @@
 
 					<div class="row top-20">
 						<div class="col-md-12">
-							<form >
+							<div class="alert alert-warning <?=$alert?>" >
+								Pendaftaran gagal, mohon isi kembali data dengan benar!.
+							</div>
+
+							<div class="alert alert-warning <?=$alertLogin?>" >
+								Login gagal, ID/Password salah masukkan dengan benar!.
+							</div>
+							<form action="<?=base_url().getModule().'/'.getController()?>/regist" method="POST">
 								<div class="form-group text-left">
 									<label class="text-muted">Mendaftar sebagai</label>
 									<div class="radio radio-primary">
-										<input type="radio" name="type" value="0" id="type_1">
+										<input type="radio" name="type" value="customer" id="customer">
 										<label for="type_1">
 											<div>Customer</div>
 										</label>
-										<input type="radio" class="ml-3" name="type" value="1" id="type_2">
+										<input type="radio" class="ml-3" name="type" value="mitra" id="mitra">
 										<label for="type_2">
 											<div>Mitra/Partner</div>
 										</label>
@@ -51,7 +58,7 @@
 										<span class="input-group-addon">
 											<i class="fa fa-user"></i>
 										</span>
-										<input name="fullname"  class="form-control border" type="text" placeholder="Nama Lengkap" autocomplete="no" >
+										<input name="name"  required="" class="form-control border" type="text" placeholder="Nama Lengkap" autocomplete="no" >
 									</div>
 
 								</div>
@@ -61,7 +68,7 @@
 										<span class="input-group-addon">
 											<i class="fa fa-phone"></i>
 										</span>
-										<input name="phone" class="form-control border" type="text" placeholder="No. Handphone" autocomplete="no" >
+										<input name="phone_number" required="" class="form-control border" type="text" placeholder="No. Handphone" autocomplete="no" >
 									</div>
 
 								</div>
@@ -71,7 +78,7 @@
 										<span class="input-group-addon">
 											<i class="fa fa-calendar"></i>
 										</span>
-										<input name="tanggal_lahir" id="tanggal_lahir"  class="form-control border datepicker" type="text" placeholder="Tanggal Lahir (dd-mm-yyyy)"  autocomplete="no" >
+										<input name="dob" id="dob"  required="" class="form-control border datepicker" type="text" placeholder="Tanggal Lahir (dd-mm-yyyy)"  autocomplete="no" >
 									</div>
 
 								</div>
@@ -81,7 +88,7 @@
 										<span class="input-group-addon">
 											<i class="fa fa-envelope"></i>
 										</span>
-										<input name="email"  class="form-control border" type="text" placeholder="Email" autocomplete="no">
+										<input name="email"  required="" class="form-control border" type="email" placeholder="Email" autocomplete="no">
 									</div>
 
 								</div>
@@ -91,7 +98,7 @@
 										<span class="input-group-addon">
 											<i class="fa fa-lock"></i> &nbsp;
 										</span>
-										<input name="password" :8'" class="form-control border" type="password" placeholder="Password" autocomplete="no" >
+										<input name="password" required="" class="form-control border" type="password" placeholder="Password" autocomplete="no" >
 									</div>
 
 								</div>
@@ -116,7 +123,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<h6>
-								Sudah Punya Akun ? <a href="#" class="text-green text-bold">Login</a>
+								Sudah Punya Akun ? <a href="<?=base_url()?>auth/login" class="text-green text-bold">Login</a>
 							</h6>
 						</div>
 					</div>

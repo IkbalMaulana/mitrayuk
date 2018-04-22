@@ -33,20 +33,19 @@
 					<div id="app">
 
 						<div class="row top-20" style="margin-top: 20px">
+							<div class="alert alert-success <?=$alert?>" >
+								Pendaftaran berhasil, login untuk melanjutkan.
+							</div>
 							<div class="col-md-12">
 
-								<div v-if="notifications[0]" class="alert text-left" v-bind:class="[isAlert]">
-									<div is="errors-message" v-bind:message="notifications"></div>
-								</div>
-
-								<form v-if="formLogin" v-on:submit.prevent="validateForm">
+								<form action="<?=base_url().getModule().'/'.getController()?>/log" method="POST">
 
 									<div class="form-group">
 										<div class="input-group stylish-input-group">
 											<span class="input-group-addon">
 												<i class="fa fa-envelope"></i>
 											</span>
-											<input name="email" class="form-control border" type="text" placeholder="Email" autocomplete="no" >
+											<input name="email" required="" class="form-control border" type="text" placeholder="Email" autocomplete="no" >
 										</div>
 									</div>
 									<div class="form-group">
@@ -54,13 +53,13 @@
 											<span class="input-group-addon">
 												 &nbsp;<i class="fa fa-lock"></i>&nbsp;
 											</span>
-											<input name="password" class="form-control border" type="password" placeholder="Password" autocomplete="no" >
+											<input name="password" required="" class="form-control border" type="password" placeholder="Password" autocomplete="no" >
 										</div>
 									</div>
 
 									<div class="form-group">
 										<small class="pull-right">
-											<a href="#" class="text-green" v-on:click.prevent="goToForgot" >Lupa kata sandi ?</a>
+											<a href="#" class="text-green"  >Lupa kata sandi ?</a>
 										</small>
 									</div>
 

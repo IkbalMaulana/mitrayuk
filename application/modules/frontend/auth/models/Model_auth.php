@@ -5,20 +5,23 @@ class Model_auth extends CI_Model {
 
 	private $table = "customer";
 
-	function login($email,$password)
+	function login($param)
 	{
-		$where = array(
-			'emailCustomer' => $email,
-			'passwordCustomer' => hash_password($password)
-			);
-		$this->db->where($where);
+		$this->db->where($param);
 		$query = $this->db->get($this->table);
 		return $query->row();
 	}
 
 	function register($data)
 	{
-		return $this->db->insert($this->table,$data);
+		$ret = FALSE;
+		$insert =  $this->db->insert($this->table,$data);
+
+		if ($insert) {
+			$ret =  TRUE;
+		}
+
+		return $ret;
 	}
 
 	function customer_confirmation($code,$where="")

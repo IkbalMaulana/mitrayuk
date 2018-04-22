@@ -2,7 +2,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-4 col-md-6">
-					<img src="<?=base_url()?>frontend/assets/img/logo-white-xs.png" class="img-fluid">
+					<img src="<?=base_url()?>assets/img/logo/logo-white-xs.png" class="img-fluid">
 					<p class="foot-desc">
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pretium orci sit amet mi ullamcorper egestas. Sed non mattis metus. Pretium orci sit amet mi ullamcorper egestas. 
 					</p>

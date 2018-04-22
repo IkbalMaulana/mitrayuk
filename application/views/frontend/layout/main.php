@@ -64,6 +64,9 @@
 	?>
 
 	<style type="text/css">
+		.hidden{
+			display: none;
+		}
 		.navbar-form .input-group .form-control:focus{
 			border-color: #ccc;
 			outline: none;
@@ -109,9 +112,14 @@
 	</style>
 
 </head>
-<body>
-
 	<?php
+
+	if (@$body == 'grey') {
+		echo "<body class='bg-light'>";
+	}
+	else{
+		echo"<body>";
+	}
 
 	if(@$header && @$header!="non"){
 		echo $this->load->view($header,'',TRUE);

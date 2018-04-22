@@ -2,6 +2,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Auth extends CI_Controller {
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->model('Model_auth', 'ma');
+	}
 
 	public function index()
 	{
@@ -10,27 +15,49 @@ class Auth extends CI_Controller {
 
 	public function login()
 	{
+		if ($this->session->userdata('logged_in')) {
+			redirect(base_url(),'refresh');
+		}
+		else{
 
-		$data['content'] = "login_content";
-		$data['header'] = "non";
+			$data['content'] = "login_content";
+			$data['header'] = "non";
 
-		
-		$data['other_css'] = array(
-			'frontend/css/pages/auth.css',
-			'frontend/plugins/bootstrap-datepicker/bootstrap-datepicker.css',			
-		);
-		$data['other_js'] = "frontend/plugins/bootstrap-datepicker/bootstrap-datepicker.js";
-		$data['non_footer'] = TRUE;		
-		$this->load->view('frontend/layout/main', $data);
+			if (@$this->input->get('r') == "true") {
+				$data['alert'] = "";
+			}
+			else{
+				$data['alert'] = "hidden";
+			}
+			$data['other_css'] = array(
+				'frontend/css/pages/auth.css',
+				'frontend/plugins/bootstrap-datepicker/bootstrap-datepicker.css',			
+			);
+			$data['other_js'] = "frontend/plugins/bootstrap-datepicker/bootstrap-datepicker.js";
+			$data['non_footer'] = TRUE;		
+			$this->load->view('frontend/layout/main', $data);
+		}
 	}
 
-	public function register()
+	public function register($status="")
 	{
 
 		$data['content'] = "login_content";
 		$data['header'] = "non";
 
-		
+		if (@$this->input->get('r') == "false") {
+			$data['alert'] = "";
+		}
+		else{
+			$data['alert'] = "hidden";
+		}
+
+		if (@$this->input->get('l') == "false") {
+			$data['alertLogin'] = "";
+		}
+		else{
+			$data['alertLogin'] = "hidden";
+		}
 		$data['other_css'] = array(
 			'frontend/css/pages/auth.css',
 			'frontend/plugins/bootstrap-datepicker/bootstrap-datepicker.css',			
@@ -40,6 +67,42 @@ class Auth extends CI_Controller {
 		$data['content'] = "register_content";
 		$data['non_footer'] = TRUE;		
 		$this->load->view('frontend/layout/main', $data);
+	}
+
+	public function regist($value='')
+	{
+		$data =  $this->input->post();
+		$data['password'] 	=  md5(md5($data['password']));
+		$data['dob'] 		=  date('Y-m-d',strtotime($data['dob']));
+		
+		$ret = $this->ma->register($data);
+
+		if ($ret) {
+			redirect(base_url().'/auth/login?r=true','refresh');
+		}
+		else{
+			redirect(base_url().'/auth/register?r=false','refresh');
+		}
+	}
+
+	public function log($value='')
+	{
+		$data =  $this->input->post();
+		$data['password'] 	=  md5(md5($data['password']));		
+		$ret = $this->ma->login($data);
+
+		if ($ret) {
+			$sess = array(
+				'name' => $ret->name,
+				'type' => $ret->type,
+				'logged_in' => TRUE
+			);
+			$this->session->set_userdata($sess);
+			print_r("good!, logged in");
+		}
+		else{
+			redirect(base_url().'/auth/login?l=false','refresh');
+		}
 	}
 
 	public function reset_password()
